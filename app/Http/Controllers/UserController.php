@@ -16,6 +16,6 @@ class UserController extends Controller
      */
     public function index(User $model)
     {
-        return view('users.index');
+        return view('pages.users.index');
     }
 }
