@@ -6,6 +6,6 @@ use App\Models\User;
 class UserRepository{
 
     public function getUsers(){
-        return User::with([])->paginate(25);
+        return User::with([])->get();
     }
 }

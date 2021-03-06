@@ -31,6 +31,30 @@
                                 </div>
                                 <div class="input-group input-group-alternative mb-3">
                                     <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="ni ni-user-run"></i></span>
+                                    </div>
+                                    <select id="inputState" class="form-control" name="agent" required autofocus>
+                                        <option value="" selected disabled>Select Agent</option>
+                                        @if(count($users) > 0)
+                                            @foreach($users as $user)
+                                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                </div>
+                                <div class="input-group input-group-alternative mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="ni ni-bold-down"></i></span>
+                                    </div>
+                                    <select id="inputState" class="form-control" name="status" required autofocus>
+                                        <option value="" selected disabled>Select Status</option>
+                                        <option value="waiting" >waiting</option>
+                                        <option value="follow up">follow up</option>
+                                        <option value="done">done</option>
+                                    </select>
+                                </div>
+                                <div class="input-group input-group-alternative mb-3">
+                                    <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-mail-bulk"></i></span>
                                     </div>
                                     <input class="form-control" placeholder="{{ __('Email') }}" type="text" name="email" required autofocus>
@@ -78,14 +102,18 @@
                                         <td>{{ $no+1 }}</td>
                                         <td id="{{ 'name'.$customer->id }}">{{ $customer->name }}</td>
                                         <td id="{{ 'email'.$customer->id }}">{{ $customer->email }}</td>
-                                        <td id="{{ 'phone'.$customer->id }}">{{ $customer->phone }}
+                                        <td id="{{ 'phone'.$customer->id }}">
                                             <a href="" target="_blank">
-                                                (send WA)
+                                                {{ $customer->phone }}
                                                 <i class="fas fa-facebook-messenger"></i>
                                             </a>
                                         </td>
                                         <td>
-                                            {{ $customer->agent }}</td>
+                                            {{ $customer->status->user->name }}
+                                        </td>
+                                        <td>
+                                            {{ $customer->status->status }}
+                                        </td>
 {{--                                        <td>{{ !is_null($customers->email_verified_at)?'VERIFIED':'NOT VERIFIED' }}</td>--}}
 {{--                                        <td>{{ !is_null($customers->role)?strtoupper($user->role):'UNKNOWN' }}</td>--}}
                                         <td>

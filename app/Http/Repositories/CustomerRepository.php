@@ -2,24 +2,37 @@
 namespace App\Http\Repositories;
 
 use App\Models\Customer;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class CustomerRepository{
 
     public function storeCustomer($request, $id = ''){
         $result = ['status' => false, 'message' => ''];
         try {
-            $filter     = $request->only(['name', 'phone', 'email']);
-            $validator  = Validator::make($filter, [
-                'name' => ['required', 'string', 'max:255'],
+            $request->only(['name', 'phone', 'email', 'agent', 'status']);
+
+            $validator  = Validator::make($request->all(), [
+                'name'  => ['required', 'string', 'max:255'],
                 'phone' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'email'],
             ]);
+
             if ($validator->fails()){
                 $result['message'] = $validator->errors()->all();
                 return $result;
             }
-            $customer = new Customer();
+            DB::beginTransaction();
+
+            $status     = new StatusRepository();
+            $addStatus  = $status->storeStatus($request, $id);
+
+            if (!$addStatus['status']){
+                $result['message'] = __('message.failed status');
+                return $result;
+            }
+            $customer   = new Customer();
             $result['message'] = __('message.store customer');
 
             if ($id){
@@ -27,10 +40,13 @@ class CustomerRepository{
                 $result['message'] = __('message.update customer');
             }
 
-            $customer->name  = $request->name;
-            $customer->phone = $request->phone;
-            $customer->email = $request->email;
+            $customer->name      = $request->name;
+            $customer->phone     = $request->phone;
+            $customer->email     = $request->email;
+            $customer->status_id = $addStatus['message']->id;
             $customer->save();
+
+            DB::commit();
 
             $result['status'] = true;
             return $result;
@@ -59,6 +75,6 @@ class CustomerRepository{
     }
 
     public function getCustomer(){
-        return Customer::with(['status'])->paginate(25);
+        return Customer::with(['status'])->get();
     }
 }

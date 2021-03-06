@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\invoices\Invoices;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -16,4 +15,8 @@ class Status extends Model
         'status',
         'agent_id',
     ];
+
+    public function user(){
+        return $this->hasOne(User::class,'id', 'agent_id');
+    }
 }
