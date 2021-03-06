@@ -14,72 +14,26 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form role="form" method="POST" action="{{ route('register') }}">
+                        <form role="form" method="POST" action="{{ route('customer.store') }}">
                             @csrf
-                            <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                                <div class="input-group input-group-alternative mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
-                                    </div>
-                                    <input class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" type="text" name="name" value="{{ old('name') }}" required autofocus>
-                                </div>
-                                @if ($errors->has('name'))
-                                    <span class="invalid-feedback" style="display: block;" role="alert">
-                                            <strong>{{ $errors->first('name') }}</strong>
-                                        </span>
-                                @endif
-                            </div>
-
-                            <div class="form-group{{ $errors->has('role') ? ' has-danger' : '' }}">
-                                <div class="input-group input-group-alternative mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="ni ni-user-run"></i></span>
-                                    </div>
-                                    <select id="inputState" class="form-control {{ $errors->has('role') ? ' is-invalid' : '' }}" name="role" value="{{ old('name') }}" required autofocus>
-                                        <option value="" selected disabled>Select Role...</option>
-                                        <option value="admin"> admin </option>
-                                        <option value="agent"> agent </option>
-                                    </select>
-                                </div>
-                                @if ($errors->has('role'))
-                                    <span class="invalid-feedback" style="display: block;" role="alert">
-                                            <strong>{{ $errors->first('role') }}</strong>
-                                        </span>
-                                @endif
-                            </div>
-
-                            <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
-                                <div class="input-group input-group-alternative mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="ni ni-email-83"></i></span>
-                                    </div>
-                                    <input class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ __('Email') }}" type="email" name="email" value="{{ old('email') }}" required>
-                                </div>
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback" style="display: block;" role="alert">
-                                            <strong>{{ $errors->first('email') }}</strong>
-                                        </span>
-                                @endif
-                            </div>
-                            <div class="form-group{{ $errors->has('password') ? ' has-danger' : '' }}">
-                                <div class="input-group input-group-alternative">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
-                                    </div>
-                                    <input class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="{{ __('Password') }}" type="password" name="password" required>
-                                </div>
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback" style="display: block;" role="alert">
-                                            <strong>{{ $errors->first('password') }}</strong>
-                                        </span>
-                                @endif
-                            </div>
                             <div class="form-group">
-                                <div class="input-group input-group-alternative">
+                                <div class="input-group input-group-alternative mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                                        <span class="input-group-text"><i class="fa fa-user"></i></span>
                                     </div>
-                                    <input class="form-control" placeholder="{{ __('Confirm Password') }}" type="password" name="password_confirmation" required>
+                                    <input class="form-control" placeholder="{{ __('Name') }}" type="text" name="name" required autofocus>
+                                </div>
+                                <div class="input-group input-group-alternative mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-phone"></i></span>
+                                    </div>
+                                    <input class="form-control" placeholder="{{ __('Phone') }}" type="text" name="phone" required autofocus>
+                                </div>
+                                <div class="input-group input-group-alternative mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-mail-bulk"></i></span>
+                                    </div>
+                                    <input class="form-control" placeholder="{{ __('Email') }}" type="text" name="email" required autofocus>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -96,10 +50,10 @@
                 <div class="card">
                     <!-- Card header -->
                     <div class="card-header border-0">
-                        <h3 class="mb-0">LIST AGENT
+                        <h3 class="mb-0">CONTACT LIST
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#exampleModal">
-                                New Agent
+                            <button type="button" class="btn btnCreate btn-sm btn-success" data-toggle="modal" data-target="#exampleModal">
+                                New Contact
                             </button>
                         </h3>
                     </div>
@@ -111,23 +65,32 @@
                                 <th scope="col" class="sort" data-sort="name">No</th>
                                 <th scope="col" class="sort" data-sort="name">Name</th>
                                 <th scope="col" class="sort" data-sort="budget">Email</th>
-                                <th scope="col" class="sort" data-sort="verification">Is Verified?</th>
-                                <th scope="col" class="sort" data-sort="role">Role</th>
+                                <th scope="col" class="sort" data-sort="verification">Phone</th>
+                                <th scope="col" class="sort" data-sort="agent">Agent</th>
+                                <th scope="col" class="sort" data-sort="status">Status</th>
                                 <th scope="col" class="sort" data-sort="action">Action</th>
                             </tr>
                             </thead>
                             <tbody class="list">
-                            @if(count($users) > 0)
-                                @foreach($users as $no => $user)
+                            @if(count($customers) > 0)
+                                @foreach($customers as $no => $customer)
                                     <tr>
                                         <td>{{ $no+1 }}</td>
-                                        <td>{{ $user->email }}</td>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ !is_null($user->email_verified_at)?'VERIFIED':'NOT VERIFIED' }}</td>
-                                        <td>{{ !is_null($user->role)?strtoupper($user->role):'UNKNOWN' }}</td>
+                                        <td id="{{ 'name'.$customer->id }}">{{ $customer->name }}</td>
+                                        <td id="{{ 'email'.$customer->id }}">{{ $customer->email }}</td>
+                                        <td id="{{ 'phone'.$customer->id }}">{{ $customer->phone }}
+                                            <a href="" target="_blank">
+                                                (send WA)
+                                                <i class="fas fa-facebook-messenger"></i>
+                                            </a>
+                                        </td>
                                         <td>
-                                            <a href="#" class="btn btn-sm btn-warning">EDIT</a>
-                                            <a href="#" class="btn btn-sm btn-danger">DELETE</a>
+                                            {{ $customer->agent }}</td>
+{{--                                        <td>{{ !is_null($customers->email_verified_at)?'VERIFIED':'NOT VERIFIED' }}</td>--}}
+{{--                                        <td>{{ !is_null($customers->role)?strtoupper($user->role):'UNKNOWN' }}</td>--}}
+                                        <td>
+                                            <button id="{{ $customer->id }}" class="btn editBtn btn-sm btn-warning">EDIT</button>
+                                            <a href="{{ url('customer/delete/'.$customer->id) }}"  class="btn btnDelete btn-sm btn-danger">DELETE</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -170,6 +133,27 @@
 
 @endsection
 @push('js')
+    <script>
+        $('.editBtn').click(function (){
+            $('.btnCreate').click();
+            let id = $(this).attr('id');
+            var name = $("#name"+id).text();
+            var phone = $("#phone"+id).text();
+            var email = $("#email"+id).text();
+            var updateUrl = window.location.origin + '/customer/' + id
+            $('input[name=name]').val(name)
+            $('input[name=phone]').val(phone)
+            $('input[name=email]').val(email)
+            $('form[role=form]').attr('action', updateUrl)
+        })
+        $(".btnDelete").click(function (){
+            if(confirm("Are you sure you want to delete this?")){
+                console.log('delete')
+            }else{
+                return false;
+            }
+        })
+    </script>
     {{--    <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.min.js"></script>--}}
     {{--    <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.extension.js"></script>--}}
 @endpush

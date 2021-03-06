@@ -86,18 +86,18 @@
                 <li class="nav-item">
                     <a class="nav-link active" href="#contactMenu" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="contactMenu">
                         <i class="fa fa-user-friends" style="color: #f4645f;"></i>
-                        <span class="nav-link-text" style="color: #f4645f;">{{ __('Contact') }}</span>
+                        <span class="nav-link-text" style="color: #f4645f;">{{ __('Customer') }}</span>
                     </a>
 
                     <div class="collapse show" id="contactMenu">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('contact.index') }}">
+                                <a class="nav-link" href="{{ route('customer.index') }}">
                                     {{ __('Manage') }}
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('contact.index') }}">
+                                <a class="nav-link" href="{{ route('customer.index') }}">
                                     {{ __('Assign') }}
                                 </a>
                             </li>
