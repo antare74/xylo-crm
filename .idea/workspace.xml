@@ -3,14 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="564bdaa6-8173-49c9-956d-c34075101e75" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Agent/AgentController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Customer/CustomerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Customer/CustomerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Repositories/CustomerRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Repositories/CustomerRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Repositories/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Repositories/UserRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Status.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Status.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/en/message.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en/message.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/id/message.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/id/message.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/navbars/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/navbars/sidebar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/agent/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/agent/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/pages/contacts/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/contacts/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -167,6 +165,7 @@
       <recent name="$PROJECT_DIR$/app/Http/Repositories" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/Http/Controllers/Agent" />
       <recent name="$PROJECT_DIR$/app/Models" />
       <recent name="$PROJECT_DIR$/resources/views/pages" />
     </key>
@@ -193,7 +192,7 @@
       <workItem from="1614910635748" duration="51000" />
       <workItem from="1614914417923" duration="8502000" />
       <workItem from="1615032213906" duration="12787000" />
-      <workItem from="1615046585943" duration="8679000" />
+      <workItem from="1615046585943" duration="11456000" />
     </task>
     <servers />
   </component>

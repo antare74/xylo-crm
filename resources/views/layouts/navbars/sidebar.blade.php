@@ -96,19 +96,21 @@
                                     {{ __('Manage') }}
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('customer.index') }}">
-                                    {{ __('Assign') }}
-                                </a>
-                            </li>
+{{--                            <li class="nav-item">--}}
+{{--                                <a class="nav-link" href="{{ route('customer.index') }}">--}}
+{{--                                    {{ __('Assign') }}--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
                         </ul>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('agent.index') }}">
-                        <i class="ni ni-circle-08 text-pink"></i> {{ __('Manage Users') }}
-                    </a>
-                </li>
+                @if(\Illuminate\Support\Facades\Auth::user()->role == 'admin')
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('agent.index') }}">
+                            <i class="ni ni-circle-08 text-pink"></i> {{ __('Manage Users') }}
+                        </a>
+                    </li>
+                @endif
             </ul>
             <!-- Divider -->
             <hr class="my-3">

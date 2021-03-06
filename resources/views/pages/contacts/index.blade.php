@@ -29,11 +29,11 @@
                                     </div>
                                     <input class="form-control" placeholder="{{ __('Phone') }}" type="text" name="phone" required autofocus>
                                 </div>
-                                <div class="input-group input-group-alternative mb-3">
+                                <div class="input-group input-group-alternative mb-3"  style="display: {{ \Illuminate\Support\Facades\Auth::user()->role !== 'admin'?'none':'' }}">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="ni ni-user-run"></i></span>
                                     </div>
-                                    <select id="inputState" class="form-control" name="agent" required autofocus>
+                                    <select id="inputState"  class="form-control" name="agent" autofocus>
                                         <option value="" selected disabled>Select Agent</option>
                                         @if(count($users) > 0)
                                             @foreach($users as $user)
@@ -76,7 +76,7 @@
                     <div class="card-header border-0">
                         <h3 class="mb-0">CONTACT LIST
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btnCreate btn-sm btn-success" data-toggle="modal" data-target="#exampleModal">
+                            <button type="button" class="btn btnCreate btn-sm btn-success" style="display: {{ \Illuminate\Support\Facades\Auth::user()->role !== 'admin'?'none':'' }}" data-toggle="modal" data-target="#exampleModal">
                                 New Contact
                             </button>
                         </h3>
@@ -98,15 +98,12 @@
                             <tbody class="list">
                             @if(count($customers) > 0)
                                 @foreach($customers as $no => $customer)
+                                    <input type="hidden" value="{{ $customer->status->agent_id }}" name="agt{{ $no }}">
                                     <tr>
                                         <td>{{ $no+1 }}</td>
                                         <td id="{{ 'name'.$customer->id }}">{{ $customer->name }}</td>
                                         <td id="{{ 'email'.$customer->id }}">{{ $customer->email }}</td>
-                                        <td id="{{ 'phone'.$customer->id }}">
-                                            <a href="" target="_blank">
-                                                {{ $customer->phone }}
-                                                <i class="fas fa-facebook-messenger"></i>
-                                            </a>
+                                        <td id="{{ 'phone'.$customer->id }}"><a href="" target="_blank">{{ $customer->phone }}<i class="fas fa-facebook-messenger"></i></a>
                                         </td>
                                         <td>
                                             {{ $customer->status->user->name }}
@@ -117,8 +114,8 @@
 {{--                                        <td>{{ !is_null($customers->email_verified_at)?'VERIFIED':'NOT VERIFIED' }}</td>--}}
 {{--                                        <td>{{ !is_null($customers->role)?strtoupper($user->role):'UNKNOWN' }}</td>--}}
                                         <td>
-                                            <button id="{{ $customer->id }}" class="btn editBtn btn-sm btn-warning">EDIT</button>
-                                            <a href="{{ url('customer/delete/'.$customer->id) }}"  class="btn btnDelete btn-sm btn-danger">DELETE</a>
+                                            <button id="{{ $customer->id }}" class="btn editBtn btn-sm btn-warning" {{ $customer->status->agent_id == \Illuminate\Support\Facades\Auth::user()->id || \Illuminate\Support\Facades\Auth::user()->role == 'admin' ?'':'disabled' }}>EDIT</button>
+                                            <a href="{{ url('customer/delete/'.$customer->id) }}"  class="btn btnDelete btn-sm btn-danger" style="display: {{ $customer->status->agent_id == \Illuminate\Support\Facades\Auth::user()->id || \Illuminate\Support\Facades\Auth::user()->role == 'admin' ?'':'none' }}">DELETE</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -168,10 +165,12 @@
             var name = $("#name"+id).text();
             var phone = $("#phone"+id).text();
             var email = $("#email"+id).text();
+            var agent = $("input[name=agt]"+id).val();
             var updateUrl = window.location.origin + '/customer/' + id
             $('input[name=name]').val(name)
             $('input[name=phone]').val(phone)
             $('input[name=email]').val(email)
+            $('select[name=agent]').val(agent)
             $('form[role=form]').attr('action', updateUrl)
         })
         $(".btnDelete").click(function (){

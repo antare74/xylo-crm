@@ -25,7 +25,7 @@ Auth::routes();
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::resource('agent', 'App\Http\Controllers\Agent\AgentController');
+    Route::resource('agent', 'App\Http\Controllers\Agent\AgentController')->middleware('admin');
     Route::group(['namespace' => 'App\Http\Controllers\Customer', 'prefix' => 'customer'], function(){
         Route::get('/','CustomerController@index')->name('customer.index');
         Route::post('/{id?}','CustomerController@store')->name('customer.store');
